@@ -5,11 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var initRoute;
+var initRouteString;
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   initRoute = preferences.getInt(MyConstant().keyRoute);
+
+  switch (initRoute) {
+    case 1:
+      initRouteString = '/authen';
+      break;
+    default:
+      initRouteString = '/onboardingScreen';
+      break;
+  }
 
   runApp(MyApp());
 }
@@ -20,7 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: routes,
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      // home: OnBoardingScreen(),
+      initialRoute: initRouteString,
     );
   }
 }

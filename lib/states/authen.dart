@@ -16,13 +16,33 @@ class _AuthenState extends State<Authen> {
           children: [
             buildLogo(context),
             buildAppName().showTitle('Care BMI'),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              child: TextFormField(
-                decoration: MyStyle().myInputDecoration(),
-              ),
-            ),
+            buildUser(context),
+            buildPassword(context),
           ],
+        ),
+      ),
+    );
+  }
+
+  Container buildUser(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 16),
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: TextFormField(
+        decoration: MyStyle().myInputDecoration(Icons.perm_identity, 'User'),
+      ),
+    );
+  }
+
+  Container buildPassword(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 16),
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: TextFormField(
+        decoration: MyStyle().myInputDecoration(
+          Icons.lock_outline,
+          'Password',
+          subfixIconData: Icons.remove_red_eye_outlined,
         ),
       ),
     );
