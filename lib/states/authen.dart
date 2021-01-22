@@ -10,22 +10,73 @@ class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            buildLogo(context),
-            buildAppName().showTitle('Care BMI'),
-            buildUser(context),
-            buildPassword(context),
-          ],
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 50,
+          ),
+          Text(
+            ' No Account ?',
+            style: MyStyle().normalTextStyle(),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'Create Account',
+              style: MyStyle().activeTextStyle(),
+            ),
+          )
+        ],
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment(0, -0.35),
+            radius: 1,
+            colors: [Colors.white, MyStyle().darkColor],
+          ),
         ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildLogo(context),
+              buildAppName().showTitle('Care BMI'),
+              buildUser(context),
+              buildPassword(context),
+              buildLogin(context),
+              buildForgotPassword()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  TextButton buildForgotPassword() => TextButton(
+        onPressed: () {},
+        child: Text(
+          'Forgot Password',
+          style: MyStyle().activeTextStyle(),
+        ),
+      );
+
+  Container buildLogin(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 16),
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: ElevatedButton(
+        style: MyStyle().buttonStyle(),
+        onPressed: () {},
+        child: Text('Login'),
       ),
     );
   }
 
   Container buildUser(BuildContext context) {
     return Container(
+      decoration: MyStyle().whiteBoxDecoration(),
       margin: EdgeInsets.only(top: 16),
       width: MediaQuery.of(context).size.width * 0.6,
       child: TextFormField(
@@ -36,6 +87,7 @@ class _AuthenState extends State<Authen> {
 
   Container buildPassword(BuildContext context) {
     return Container(
+      decoration: MyStyle().whiteBoxDecoration(),
       margin: EdgeInsets.only(top: 16),
       width: MediaQuery.of(context).size.width * 0.6,
       child: TextFormField(
