@@ -21,7 +21,7 @@ class _AuthenState extends State<Authen> {
             style: MyStyle().normalTextStyle(),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, '/createAcount'),
             child: Text(
               'Create Account',
               style: MyStyle().activeTextStyle(),
