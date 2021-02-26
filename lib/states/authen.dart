@@ -94,7 +94,7 @@ class _AuthenState extends State<Authen> {
         decoration: MyStyle().myInputDecoration(
           Icons.lock_outline,
           'Password',
-          subfixIconData: Icons.remove_red_eye_outlined,
+          redEye: true,
         ),
       ),
     );

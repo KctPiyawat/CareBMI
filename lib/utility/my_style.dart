@@ -6,7 +6,7 @@ class MyStyle {
   Color lightColor = Color(0xff9cf54e);
   Color activeColor = Colors.pink.shade700;
 
-  BoxDecoration whiteBoxDecoration()=> BoxDecoration(
+  BoxDecoration whiteBoxDecoration() => BoxDecoration(
         color: Colors.white54,
         borderRadius: BorderRadius.circular(30),
       );
@@ -16,12 +16,13 @@ class MyStyle {
         color: activeColor,
       );
 
-   TextStyle normalTextStyle() => TextStyle(
+  TextStyle normalTextStyle() => TextStyle(
         fontStyle: FontStyle.normal,
         color: Colors.white,
-      );   
+      );
 
-  ButtonStyle buttonStyle() => ElevatedButton.styleFrom(shadowColor: Colors.white,
+  ButtonStyle buttonStyle() => ElevatedButton.styleFrom(
+      shadowColor: Colors.white,
       primary: MyStyle().darkColor,
       onPrimary: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)));
@@ -39,23 +40,47 @@ class MyStyle {
       );
 
   InputDecoration myInputDecoration(IconData iconData, String string,
-          {IconData subfixIconData}) =>
-      InputDecoration(
-        hintStyle: TextStyle(color: darkColor),
-        hintText: string,
-        prefixIcon: Icon(
-          iconData,
-          color: darkColor,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: darkColor),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: lightColor),
-          borderRadius: BorderRadius.circular(30),
-        ),
-      );
+          {bool redEye}) =>
+      redEye == null
+          ? InputDecoration(
+              hintStyle: TextStyle(color: darkColor),
+              hintText: string,
+              prefixIcon: Icon(
+                iconData,
+                color: darkColor,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: darkColor),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: lightColor),
+                borderRadius: BorderRadius.circular(30),
+              ),
+            )
+          : InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color: darkColor,
+                ),
+                onPressed: () {},
+              ),
+              hintStyle: TextStyle(color: darkColor),
+              hintText: string,
+              prefixIcon: Icon(
+                iconData,
+                color: darkColor,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: darkColor),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: lightColor),
+                borderRadius: BorderRadius.circular(30),
+              ),
+            );
 
   MyStyle();
 

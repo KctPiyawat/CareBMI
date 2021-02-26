@@ -10,7 +10,7 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   String typeUser, name, user, password, repassword;
   final formKey = GlobalKey<FormState>();
-  bool statusRadio = true;
+  bool statusRadio = true, redEyePass = true, redEyeRePass = true;
 
   Container buildDisplayName(BuildContext context) {
     return Container(
@@ -58,7 +58,7 @@ class _CreateAccountState extends State<CreateAccount> {
       margin: EdgeInsets.only(top: 16),
       width: MediaQuery.of(context).size.width * 0.6,
       child: TextFormField(
-        onSaved: (newValue) => password = newValue.trim(),
+        onChanged: (newValue) => password = newValue.trim(),
         validator: (value) {
           if (value?.isEmpty ?? true) {
             return 'Please Fill Password in Blank';
@@ -66,11 +66,10 @@ class _CreateAccountState extends State<CreateAccount> {
             return null;
           }
         },
-        obscureText: true,
+        obscureText: redEyePass,
         decoration: MyStyle().myInputDecoration(
-          Icons.lock_outline,
-          'Password :',
-        ),
+            Icons.lock_outline, 'Password :',
+            redEye: redEyeRePass),
       ),
     );
   }
@@ -81,18 +80,20 @@ class _CreateAccountState extends State<CreateAccount> {
       margin: EdgeInsets.only(top: 16),
       width: MediaQuery.of(context).size.width * 0.6,
       child: TextFormField(
-        onSaved: (newValue) => repassword = newValue.trim(),
         validator: (value) {
           if (value?.isEmpty ?? true) {
             return 'Please Fill RePassword in Blank';
+          } else if (value != password) {
+            return 'Password And RePassword Not Math';
           } else {
             return null;
           }
         },
-        obscureText: true,
+        obscureText: redEyeRePass,
         decoration: MyStyle().myInputDecoration(
           Icons.lock_outline,
           'Re-Password : ',
+          redEye: redEyeRePass,
         ),
       ),
     );
@@ -128,24 +129,24 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Container buildValidateRadio(BuildContext context) {
     return Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Divider(
-                      color: Colors.red,
-                      thickness: 1.0,
-                    ),
-                    Text(
-                      'Please Choose Type User',
-                      style: TextStyle(
-                        color: Colors.red[700],
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-
-              );
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Divider(
+            color: Colors.red,
+            thickness: 1.0,
+          ),
+          Text(
+            'Please Choose Type User',
+            style: TextStyle(
+              color: Colors.red[700],
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Container buildCreateAccount(BuildContext context) {
@@ -155,10 +156,10 @@ class _CreateAccountState extends State<CreateAccount> {
       child: ElevatedButton(
         style: MyStyle().buttonStyle(),
         onPressed: () {
-          if (formKey.currentState.validate() && typeUser != null ) {
+          if (formKey.currentState.validate() && typeUser != null) {
             formKey.currentState.save();
           }
-          if (typeUser==null) {
+          if (typeUser == null) {
             setState(() {
               statusRadio = false;
             });
